@@ -1,7 +1,8 @@
 import { config } from "@/config/config"
 import { useQuery } from "@tanstack/react-query"
 
-const useUsersQuery = (
+const useAllQuery = (
+    path:string,
     limit: number,
     skip: number,
     search: string,
@@ -10,7 +11,7 @@ const useUsersQuery = (
         queryKey: ["users", limit, skip, search],
         queryFn: async () => {
             // Build URL with search parameter if provided
-            let url = `${config.baseUrl}/users/search?limit=${limit}&skip=${skip}`
+            let url = `${config.baseUrl}/${path}?limit=${limit}&skip=${skip}`
             
             if (search) {
                 url += `&q=${encodeURIComponent(search)}`
@@ -27,4 +28,4 @@ const useUsersQuery = (
     })
 }
 
-export default useUsersQuery
+export default useAllQuery
